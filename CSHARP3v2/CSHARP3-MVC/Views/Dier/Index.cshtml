@@ -1,0 +1,76 @@
+﻿<!-- gemaakt door: Arda -->
+@model List<Csharp_lib.Dier>
+
+@{
+    ViewData["Title"] = "Dierengeluiden";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Dierengeluiden</h1>
+    <p>Klik op een dier om het geluid te horen!</p>
+</div>
+
+<div class="container">
+    <div class="row">
+        @foreach (var dier in Model)
+        {
+            var dierNaam = "";
+            var imagePath = "";
+            if (dier is Csharp_lib.Hond)
+            {
+                dierNaam = "Hond";
+                imagePath = Url.Content("~/images/hond.jpg");
+            }
+            else if (dier is Csharp_lib.Kip)
+            {
+                dierNaam = "Kip";
+                imagePath = Url.Content("~/images/kip.jpg");
+            }
+            else if (dier is Csharp_lib.Varken)
+            {
+                dierNaam = "Varken";
+                imagePath = Url.Content("~/images/varken.jpg");
+            }
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="@imagePath" class="card-img-top" alt="@dierNaam" />
+                    <div class="card-body">
+                        <h5 class="card-title">@dierNaam</h5>
+                        <p class="card-text">Gewicht: @dier.Gewicht kg</p>
+                        <button class="btn btn-primary dier-knop" data-dier-type="@dierNaam" data-dier-gewicht="@dier.Gewicht">
+                            Geluid afspelen
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Verborgen audio element voor het afspelen van geluiden -->
+<audio id="geluidSpeler" style="display: none;"></audio>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('.dier-knop').click(function() {
+                var dierType = $(this).data('dier-type');
+                var dierGewicht = $(this).data('dier-gewicht');
+
+                $.ajax({
+                    url: '@Url.Action("SpeelGeluid", "Dier")',
+                    type: 'GET',
+                    data: { type: dierType, gewicht: dierGewicht },
+                    success: function(response) {
+                        var speler = document.getElementById('geluidSpeler');
+                        speler.src = '/sounds/' + response.bestand;
+                        speler.play();
+                    },
+                    error: function() {
+                        alert("Er is een fout opgetreden bij het ophalen van het geluid.");
+                    }
+                });
+            });
+        });
+    </script>
+}

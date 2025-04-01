@@ -1,0 +1,41 @@
+﻿<!-- gemaakt door: Jim -->
+
+@model CSHARP3.ViewModels.RapportViewModel
+
+@{
+    ViewData["Title"] = "Voorraad Overzicht";
+}
+
+
+
+<h2>Voorraad Overzicht</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Titel</th>
+            <th>Type</th>
+            <th>Prijs (€)</th>
+            <th>Voorraad</th>
+            <th>Totale Waarde (€)</th>
+            <th>Acties</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.Titel</td>
+                <td>@product.ProductType</td>
+                <td>@product.Prijs</td>
+                <td>@product.Voorraad</td>
+                <td>@(product.Prijs * product.Voorraad)</td>
+                <td>
+                    <a asp-action="Verkoop" asp-route-id="@product.Id" class="btn btn-primary">Verkopen</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Totale voorraadwaarde: € @Model.TotaleVoorraadWaarde</h4>
