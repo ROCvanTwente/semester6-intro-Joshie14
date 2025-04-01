@@ -1,0 +1,31 @@
+﻿<!-- gemaakt door: arda-->
+@{
+    ViewData["Title"] = "Nieuw Dier Toevoegen";
+}
+
+<h1>Nieuw Dier Toevoegen</h1>
+
+<form method="post" action="/Dier/VoegToe">
+    <div class="form-group">
+        <label for="name">Naam</label>
+        <input type="text" class="form-control" id="name" name="name" required />
+    </div>
+    <div class="form-group">
+        <label for="type">Soort</label>
+        <select class="form-control" id="type" name="type" required>
+            <option value="Hond">Hond</option>
+            <option value="Kip">Kip</option>
+            <option value="Varken">Varken</option>
+            <option value="Eend">Eend</option>
+            <option value="Koe">Koe</option>
+            <option value="Slang">Slang</option>
+            <option value="Vos">Vos</option>
+            <option value="Schaap">Schaap</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="gewicht">Gewicht</label>
+        <input type="number" class="form-control" id="gewicht" name="gewicht" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Dier Toevoegen</button>
+</form>
