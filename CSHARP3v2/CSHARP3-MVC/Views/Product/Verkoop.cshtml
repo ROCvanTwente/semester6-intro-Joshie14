@@ -1,0 +1,23 @@
+﻿<!-- gemaakt door: Jim-->
+
+@model CSHARP3.ViewModels.VerkoopViewModel
+
+@{
+    ViewData["Title"] = "Verkoop Product";
+}
+
+<h2>Verkoop Product</h2>
+
+<form asp-action="Verkoop" method="post">
+    <input type="hidden" asp-for="ProductId" />
+
+    <div class="form-group">
+        <label asp-for="Aantal"></label>
+        <input asp-for="Aantal" class="form-control" />
+        <span asp-validation-for="Aantal" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Verkopen</button>
+    <a asp-action="Overzicht" class="btn btn-secondary">Annuleren</a>
+</form>
+

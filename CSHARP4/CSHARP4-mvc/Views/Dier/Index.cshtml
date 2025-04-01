@@ -1,0 +1,99 @@
+﻿<!-- gemaakt door: arda -->
+@model List<AnimalWorld.Dier>
+
+@{
+    ViewData["Title"] = "Dierengeluiden";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Dierengeluiden</h1>
+</div>
+
+<!-- Tabel met dieren -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Naam</th>
+            <th>Soort</th>
+            <th>Positie</th>
+            <th>Acties</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dier in Model)
+        {
+            <tr>
+                <td onmouseover="toonPositie(@dier.Id)"
+                    onmouseout="resetPositie(@dier.Id)">
+                    @dier.Name
+                </td>
+                <td>@dier.GetType().Name</td>
+                <td id="positie-@dier.Id">X: @dier.Position.X, Y: @dier.Position.Y</td>
+                <td>
+                    <!-- Geluid knop -->
+                    <button class="btn btn-primary" onclick="speelGeluid(@dier.Id)">🔊</button>
+
+                    <!-- Richting select menu -->
+                    <select id="richting-@dier.Id" class="form-select">
+                        <option value="Up">Omhoog</option>
+                        <option value="Down">Omlaag</option>
+                        <option value="Left">Links</option>
+                        <option value="Right">Rechts</option>
+                    </select>
+
+                    <!-- Stap invoer -->
+                    <input type="number" id="stap-@dier.Id" value="10" min="1" class="form-control" style="width: 80px;" />
+
+                    <!-- Verplaats knop -->
+                    <button class="btn btn-secondary" onclick="verplaatsDier(@dier.Id)">🚀</button>
+                </td>
+            </tr>
+        }
+        <tr>
+			<td class="col-5"></td>
+            <td class="col-2">
+			    <a class="nav-link text-dark" asp-area="" asp-controller="Dier" asp-action="Create">
+					<center>Voeg toe</center>
+				</a>
+            </td>
+            <td class="col-3"></td>
+            <td class="col-2"></td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Script section -->
+@section Scripts {
+    <script>
+        // Speelt het geluid van het dier af
+        function speelGeluid(id) {
+            $.get('/Dier/SpeelGeluid/' + id, function(response) {
+                var audio = new Audio('/sounds/' + response.bestand);
+                audio.play();
+            });
+        }
+
+        // Toont de positie wanneer de gebruiker over de naam van het dier beweegt
+        function toonPositie(id) {
+            var positieElement = document.getElementById('positie-' + id);
+            positieElement.style.fontWeight = "bold";
+        }
+
+        // Zet de positie weer op normaal gewicht wanneer de gebruiker de muis weg haalt
+        function resetPositie(id) {
+            var positieElement = document.getElementById('positie-' + id);
+            positieElement.style.fontWeight = "normal";
+        }
+
+        // Verplaatst het dier op basis van de gekozen richting en aantal eenheden
+        function verplaatsDier(id) {
+            var richting = document.getElementById('richting-' + id).value;
+            var stap = document.getElementById('stap-' + id).value;
+
+            $.post('/Dier/Verplaats', { id: id, direction: richting, step: stap }, function(response) {
+                var positieElement = document.getElementById('positie-' + id);
+                positieElement.innerText = "X: " + response.x + ", Y: " + response.y;
+            });
+        }
+    </script>
+}

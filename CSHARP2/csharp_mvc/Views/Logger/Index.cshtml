@@ -1,0 +1,63 @@
+﻿@model CSHARP2.Models.LogViewModel
+
+@{
+    ViewData["Title"] = "Logger Demo";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h2>Logger Demo</h2>
+            </div>
+            <div class="card-body">
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success">
+                        @TempData["SuccessMessage"]
+                    </div>
+                }
+
+                <form asp-action="Index" method="post">
+                    <div class="form-group">
+                        <label asp-for="Message" class="control-label"></label>
+                        <textarea asp-for="Message" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Message" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-primary">Log Bericht</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h2>Recente Logs</h2>
+            </div>
+            <div class="card-body">
+                @if (Model.RecentLogs.Any())
+                {
+                    <ul class="list-group">
+                        @foreach (var log in Model.RecentLogs)
+                        {
+                            <li class="list-group-item">@log</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>Geen recente logs gevonden.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAnimalsMVC", "CSHARP4-mvc\MyAnimalsMVC.csproj", "{E5F447A6-17C1-4556-95ED-5EF30AA343E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalWorld", "Csharp-lib\AnimalWorld.csproj", "{4518AED7-04E4-4BA5-A80A-9D921B8F91BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5F447A6-17C1-4556-95ED-5EF30AA343E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5F447A6-17C1-4556-95ED-5EF30AA343E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5F447A6-17C1-4556-95ED-5EF30AA343E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5F447A6-17C1-4556-95ED-5EF30AA343E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4518AED7-04E4-4BA5-A80A-9D921B8F91BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4518AED7-04E4-4BA5-A80A-9D921B8F91BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4518AED7-04E4-4BA5-A80A-9D921B8F91BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4518AED7-04E4-4BA5-A80A-9D921B8F91BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E3806FE7-A09D-4349-8544-4FB9FD4B4F97}
+	EndGlobalSection
+EndGlobal

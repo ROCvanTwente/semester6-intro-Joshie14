@@ -1,0 +1,31 @@
+﻿@model IEnumerable<CSHARP2.IAnimal>
+
+@{
+    ViewBag.Title = "Animals";
+}
+
+<h2>Animals</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Weight (kg)</th>
+            <th>Age (years)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var animal in Model)
+        {
+            <tr>
+                <td>@animal.Name</td>
+                <td>@animal.Weight</td>
+                <td>@animal.Age</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Animals", new { name = animal.Name })">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
